@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
+import { Canvas, Circle } from '@shopify/react-native-skia';
 import { useState } from 'react';
 import {
   Keyboard,
@@ -106,6 +107,17 @@ export default function App() {
               navigating, and capturing screenshots on a remote iOS simulator.
             </Text>
 
+            <View style={styles.skiaPanel}>
+              <Canvas style={styles.skiaCanvas}>
+                <Circle cx={46} cy={44} r={30} color="#2563eb" />
+                <Circle cx={80} cy={44} r={30} color="#14b8a6" />
+                <Circle cx={114} cy={44} r={30} color="#f97316" />
+              </Canvas>
+              <Text testID="skia-working-message" style={styles.skiaStatus}>
+                skia is working
+              </Text>
+            </View>
+
             <View style={styles.counterPanel}>
               <View>
                 <Text style={styles.rowLabel}>Counter</Text>
@@ -207,6 +219,25 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 22,
     marginBottom: 18,
+  },
+  skiaPanel: {
+    alignItems: 'center',
+    backgroundColor: '#f8fafc',
+    borderColor: '#dbeafe',
+    borderRadius: 18,
+    borderWidth: 1,
+    marginBottom: 14,
+    padding: 14,
+  },
+  skiaCanvas: {
+    height: 88,
+    width: 160,
+  },
+  skiaStatus: {
+    color: '#15803d',
+    fontSize: 15,
+    fontWeight: '800',
+    marginTop: 8,
   },
   counterPanel: {
     borderRadius: 18,
