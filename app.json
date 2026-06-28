@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "sample-expo-test-app",
-    "slug": "sample-expo-test-app",
+    "slug": "sample-expo54-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -29,6 +29,15 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2a21b228-dd4e-4350-8e07-68b7f0f8e584"
+      }
+    },
+    "owner": "limrun",
+    "updates": {
+      "url": "https://u.expo.dev/2a21b228-dd4e-4350-8e07-68b7f0f8e584"
     }
   }
 }
