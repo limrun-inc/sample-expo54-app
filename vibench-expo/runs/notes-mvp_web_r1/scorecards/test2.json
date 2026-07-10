@@ -1,0 +1,49 @@
+{
+  "test": "test2",
+  "steps": [
+    {
+      "name": "test_empty_state_and_new_note_creation",
+      "points_possible": 10,
+      "points_earned": 10,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Fresh install (dev-client uninstall + reinstall from shared asset). Gate shown (SecureTextField, masked); no note data pre-unlock. Unlocked: notes list with empty state 'No notes yet...' and New Note button. New Note opened editor with empty focused TextArea (id=note-body-input, IsEditing). Returned without typing: empty note listed with placeholder title 'New Note' and timestamp '2026-07-10 22:01' matching UTC format and current time."
+    },
+    {
+      "name": "test_title_derived_from_first_nonempty_line",
+      "points_possible": 12,
+      "points_earned": 12,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Opened the empty note (tap by coordinates; label 'New Note' was ambiguous with the New Note button). Typed '\\nMeeting Notes\\nAction items from today's call.' as one multi-line type (verified field value via element tree). Back to list: title 'Meeting Notes' (blank first line skipped), preview 'Action items from today's call.', timestamp updated to '2026-07-10 22:02' (matched date -u)."
+    },
+    {
+      "name": "test_sorting_by_last_edited",
+      "points_possible": 12,
+      "points_earned": 12,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Created 'Shopping List' (saved 22:03); both notes present. TS_SHOPPING=2026-07-10 22:03 > TS_MEETING=22:02 and Shopping List was above Meeting Notes — sorting consistent. Edited Meeting Notes appending 'Follow up tomorrow' (typed at 22:03:42), waited past minute rollover and navigated back at 22:04:16. Title still 'Meeting Notes'. TS_MEETING_2=22:03 and TS_SHOPPING_2=22:03 (equal), so either order acceptable per plan; Meeting Notes was on top, consistent with most-recent edit. Observation (not a listed verification failure): the displayed timestamp reflects the time of the last text change (22:03) rather than the navigate-away save moment (22:04), so the plan's minute-rollover trick did not produce distinct timestamps."
+    },
+    {
+      "name": "test_autosave_persists_on_navigation",
+      "points_possible": 14,
+      "points_earned": 14,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Replaced Shopping List content with 'Daily Tasks\\nBuy groceries and call dentist.' and immediately navigated back: title 'Daily Tasks', preview 'Buy groceries and call dentist.', timestamp 22:05. Cold relaunch (terminate-app + reopen dev-client URL): gate shown first, no note data while locked. Unlocked: 'Daily Tasks' present; opening it shows exact body 'Daily Tasks\\nBuy groceries and call dentist.' with line structure preserved."
+    },
+    {
+      "name": "test_empty_note_remains_valid",
+      "points_possible": 8,
+      "points_earned": 8,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "New note, typed 'Temporary text', cleared via 14 backspace key presses (field AXValue became empty), returned to list. A placeholder-titled 'New Note' row exists (only one placeholder note in list, body verified empty before saving) with timestamp '2026-07-10 22:06' matching YYYY-MM-DD hh:mm UTC."
+    }
+  ],
+  "points_earned": 56,
+  "full_points": 56,
+  "pass": true,
+  "notes": "Fresh state via dev-client uninstall + reinstall from shared asset. All fatal and non-fatal verifications passed. One behavioral observation in test_sorting_by_last_edited: last-edited timestamp appears to be set at text-change time rather than at navigation-away save time (displayed 22:03 though the navigate-away happened at 22:04:16); this made the plan's deterministic sort check a minute-level tie, which the plan explicitly accepts. Multi-line input worked via a single `lim ios type` call containing newline characters."
+}

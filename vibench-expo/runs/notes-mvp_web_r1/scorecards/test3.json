@@ -1,0 +1,65 @@
+{
+  "test": "test3",
+  "steps": [
+    {
+      "name": "test_setup_notes_for_search",
+      "points_possible": 6,
+      "points_earned": 6,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Fresh install (dev-client uninstall + reinstall from shared asset), unlocked with password. Created Project Alpha, Shopping List, Weekend Ideas via New Note, each typed as a single multi-line `lim ios type`, autosaved by navigating back to the list. All three titles present with correct previews and timestamps (2026-07-10 22:08 UTC). Search input (id=search-input, 'Search notes') visible above the list."
+    },
+    {
+      "name": "test_case_insensitive_substring_search",
+      "points_possible": 12,
+      "points_earned": 12,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Typed 'project' (lowercase): results were 'Weekend Ideas' (body contains 'projects') and 'Project Alpha' (title, case-insensitive match); 'Shopping List' absent. All three notes shared timestamp 22:08 (minute-level tie), so any ordering among matches is acceptable per plan; order shown was Weekend Ideas then Project Alpha, same relative order as the unfiltered list."
+    },
+    {
+      "name": "test_clear_search_restores_all",
+      "points_possible": 4,
+      "points_earned": 4,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Cleared the query with backspace key presses. All three notes reappeared."
+    },
+    {
+      "name": "test_search_no_results",
+      "points_possible": 6,
+      "points_earned": 6,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Query 'zzz-nomatch-123': no note rows; friendly empty state 'No notes match your search.' (not an error). Cleared the field: all notes reappeared."
+    },
+    {
+      "name": "test_delete_from_list_with_cancel",
+      "points_possible": 8,
+      "points_earned": 8,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Tapped the Shopping List row's 'Delete note' button. Confirmation dialog appeared: 'Delete Note' / 'This note will be permanently deleted. This cannot be undone.' with Cancel (id=delete-cancel-button) and Delete (id=delete-confirm-button). Tapped Cancel: dialog closed, Shopping List still listed. Dialog is a custom in-app modal (has testIDs), fully reachable in the accessibility tree."
+    },
+    {
+      "name": "test_delete_from_list_confirmed",
+      "points_possible": 12,
+      "points_earned": 12,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Re-initiated deletion and confirmed (first confirm tap raced the dialog animation and did not register; a second tap on delete-confirm-button worked — evaluator timing, not an app defect). Shopping List immediately removed; Project Alpha and Weekend Ideas remained. Search 'shopping': 'No notes match your search.', no rows. Cleared search, cold relaunch (terminate-app + reopen dev-client URL): password gate shown before any note data. Unlocked: list shows only Weekend Ideas and Project Alpha — deletion persisted."
+    },
+    {
+      "name": "test_delete_from_editor",
+      "points_possible": 12,
+      "points_earned": 12,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Opened Project Alpha (editor body 'Project Alpha\\nMeeting notes and deliverables.'). Tapped editor 'Delete note' (id=editor-delete-button): same confirmation dialog appeared. Confirmed: app returned to the notes list, Project Alpha gone, Weekend Ideas still present."
+    }
+  ],
+  "points_earned": 60,
+  "full_points": 60,
+  "pass": true,
+  "notes": "Fresh state via dev-client uninstall + reinstall from shared asset com.vibench.expobench/main-debug.zip. All fatal and non-fatal verifications passed. Delete confirmation is a custom modal rather than a native Alert.alert; it is accessible and labeled, and behaves identically from list and editor."
+}
