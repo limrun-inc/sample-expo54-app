@@ -1,0 +1,9 @@
+{
+  "condition": "limrun",
+  "iterations": 1,
+  "self_assessment": "Implemented the full quiz PRD in App.js as a four-screen flow (category selection, surprise/warning interstitial, quiz, results) and verified every requirement directly on the Limrun iOS simulator via the accessibility tree, taps, and a screenshot. Verified: all 14 categories plus Surprise Me listed; Geography goes straight into a 10-question game; Correct!/Incorrect feedback with green highlight of the correct answer and explanation on every question; 'Question X of Y' progress; 'Next Question' vs 'See Results' on the final question; score format 'X/Y Correct (Z%)' and elapsed seconds; achievement logic across four full games (Perfect Round only at 10/10 with 10 questions, Hot Streak at max streak >=5, Triple Win at >=3, overlapping awards, and 'No achievements this round'); streak reset on incorrect; the exact <10-question warning with Proceed Anyway for History; Surprise Me revealing the picked category; Play Again resampling the same category and New Category returning to selection; and terminate/relaunch resetting to a fresh session. No fixes were needed after the initial implementation, so everything passed in one build-verify iteration.",
+  "known_gaps": [
+    "SafeAreaView deprecation warning from react-native (cosmetic; component still works on the tested SDK 54 runtime).",
+    "Elapsed time is captured when the user advances past the last question rather than at the moment of the last answer (difference of however long the user reads the final explanation)."
+  ]
+}
