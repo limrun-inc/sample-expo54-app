@@ -1,0 +1,49 @@
+{
+  "test": "test1",
+  "steps": [
+    {
+      "name": "test_category_selection_screen",
+      "points_possible": 2,
+      "points_earned": 2,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "All 14 expected categories present in the accessibility tree (History, Geography, Art & Culture, Science, Nature, Literature, Music, Health, Finance, Technology, Sports, Nutrition, Daily Life, Film & Television) plus a 'Surprise Me!' option (testID category-surprise-me). List rendered in a scrollable view; all items were exposed in the tree without needing to swipe."
+    },
+    {
+      "name": "test_geography_game_initialization",
+      "points_possible": 2,
+      "points_earned": 2,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Tapping Geography loaded gameplay: question text visible ('What is the largest country by land area?'), four options labeled 'A. ...' through 'D. ...' (testIDs option-A..option-D), progress indicator 'Question 1 of 10'. Category label 'Geography' also shown on the gameplay screen."
+    },
+    {
+      "name": "test_answer_feedback_and_navigation",
+      "points_possible": 5,
+      "points_earned": 5,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Answered all 10 Geography questions correctly by matching on-screen question text to assets/questions.json and selecting the option whose text equals the correct_option text. After every submission the tree showed 'Correct!' plus the matching explanation text, and a 'Next Question' button (testID next-button). Correct-answer highlighting verified visually via screenshot on Q1 (selected correct option rendered with green background/border). On Q10 the advance control changed to 'See Results', which navigated to the results screen."
+    },
+    {
+      "name": "test_perfect_score_results",
+      "points_possible": 4,
+      "points_earned": 4,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Results screen showed '10/10 Correct (100%)', 'Time: 150 seconds' (seconds granularity, non-fatal check passed), and all three achievements listed under 'Achievements': Perfect Round, Hot Streak, Triple Win."
+    },
+    {
+      "name": "test_play_again_same_category",
+      "points_possible": 1,
+      "points_earned": 1,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "'Play Again' (testID play-again-button) restarted at 'Question 1 of 10' with the category label 'Geography' displayed; first question ('What is the main language spoken in Brazil?') is a Geography question in questions.json."
+    }
+  ],
+  "points_earned": 14,
+  "full_points": 14,
+  "pass": true,
+  "notes": "Core quiz flow fully functional. Fresh state mechanism: app driven via Expo dev-client with Metro tunnel for this run's app; step sequence executed within one session as the plan allows. All fatal and non-fatal verifications passed."
+}
