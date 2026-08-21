@@ -25,6 +25,6 @@
   },
   "overrides": {
     "nanoid@^3.0.0": "3.3.18",
-    "brace-expansion@^2.0.0": "2.1.2"
+    "brace-expansion@^2.0.0": "2.1.4"
   }
 }
