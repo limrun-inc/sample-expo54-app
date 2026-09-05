@@ -1,0 +1,9 @@
+{
+  "condition": "web",
+  "iterations": 4,
+  "self_assessment": "All PRD requirements are implemented in a single App.js and verified end-to-end in the Expo web preview via a headless-Chrome CDP driver: password gate (masked field, button and keyboard submit, 'Password is required' and 'Incorrect password' errors, no note data before unlock, re-lock on relaunch, no re-lock needed on background), notes list (title from first non-empty trimmed line with 'New Note' placeholder, single-line preview after the title line, exact 'YYYY-MM-DD hh:mm' 24-hour UTC timestamps, descending last-edited sort), create/edit (New Note opens editor with focused multiline body, line breaks preserved, autosave on every keystroke so text visible at navigation time is always persisted, timestamp updates on save), search (live case-insensitive substring over title or body, sort preserved, empty query shows all), and delete (from list row and editor, custom Modal confirmation with permanent-deletion messaging, editor delete navigates back, deletion persists). Persistence uses AsyncStorage and survives reload (relaunch analogue). All controls are standard RN components with testIDs and accessible text; note rows expose title/preview/timestamp as individual accessibility elements.",
+  "known_gaps": [
+    "Native-only behaviors (iOS keyboard covering the editor, exact accessibility-tree flattening of Touchable rows, AppState backgrounding) could not be observed in the web preview and are handled by reasoning: modal dialog instead of Alert.alert, accessible={false} on row containers, in-memory unlock state.",
+    "Preview truncation relies on numberOfLines={1} native ellipsis plus a 120-char hard cap; exact ellipsis rendering width on iOS was not observable on web."
+  ]
+}

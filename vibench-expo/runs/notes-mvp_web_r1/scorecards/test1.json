@@ -1,0 +1,65 @@
+{
+  "test": "test1",
+  "steps": [
+    {
+      "name": "test_password_gate_blocks_access",
+      "points_possible": 6,
+      "points_earned": 6,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Fresh install (dev-client uninstalled and reinstalled from shared asset). On launch the app shows a full-screen password gate ('Notes' / 'Enter your password to unlock'). Element tree shows TextField id=password-input with SecureTextField trait (masked; screenshot confirms placeholder 'Password' and dots when typing) and Button id=unlock-button 'Unlock'. No note titles, previews, counts, or timestamps anywhere in the tree before unlock."
+    },
+    {
+      "name": "test_empty_and_wrong_password_rejected",
+      "points_possible": 8,
+      "points_earned": 8,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Empty submit: stayed on gate, showed 'Password is required'. Typed 'wrong-password' (field displayed 14 mask dots) and submitted: stayed on gate, showed 'Incorrect password', no note data appeared."
+    },
+    {
+      "name": "test_correct_password_unlocks",
+      "points_possible": 6,
+      "points_earned": 6,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Entered 'my-notes-are-mine' and tapped Unlock. Transitioned to notes list with empty state 'No notes yet. Tap \"New Note\" to create one.' and Button id=new-note-button 'New Note'."
+    },
+    {
+      "name": "test_session_persists_within_app",
+      "points_possible": 4,
+      "points_earned": 4,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Tapped New Note (editor opened with focused body TextArea id=note-body-input), tapped Back to notes. No password re-prompt; list shown directly (with the autosaved empty note titled 'New Note')."
+    },
+    {
+      "name": "test_relaunch_relocks_app",
+      "points_possible": 8,
+      "points_earned": 8,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Cold relaunch = lim ios terminate-app com.vibench.expobench then reopened dev-client URL. Password gate shown again; no note data in tree while locked. Re-entered password; notes list accessible again with the 'New Note' placeholder note intact."
+    },
+    {
+      "name": "test_background_foreground_does_not_lose_state",
+      "points_possible": 6,
+      "points_earned": 6,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Created note with body 'Session test note', returned to list (saved, timestamp 2026-07-10 21:58 matches current UTC minute). Backgrounded by launching com.apple.Preferences, foregrounded via launch-app --mode ForegroundIfRunning. App remained unlocked, no crash, 'Session test note' still listed."
+    },
+    {
+      "name": "test_note_data_persists_across_relaunch_behind_gate",
+      "points_possible": 12,
+      "points_earned": 12,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Cold relaunch: gate appeared first, no note content in tree while locked. Unlocked with 'my-notes-are-mine': list shows 'Session test note' (2026-07-10 21:58). Opened it: editor TextArea value is exactly 'Session test note'."
+    }
+  ],
+  "points_earned": 50,
+  "full_points": 50,
+  "pass": true,
+  "notes": "Fresh state achieved via full dev-client uninstall + reinstall from shared asset com.vibench.expobench/main-debug.zip. Cold relaunch = terminate-app + reopen dev-client URL (preserves AsyncStorage). All fatal and non-fatal verifications passed. Timestamps in list use YYYY-MM-DD hh:mm and matched current UTC time (date -u). Metro over exp.direct tunnel failed on first load ('Failed to load app'); a Reload from the dev-client error screen succeeded — infrastructure flake, not an app defect."
+}
