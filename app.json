@@ -18,7 +18,8 @@
             "deploymentTarget": "15.1"
           }
         }
-      ]
+      ],
+      "./plugins/with-pod-deployment-target"
     ],
     "splash": {
       "image": "./assets/splash-icon.png",
