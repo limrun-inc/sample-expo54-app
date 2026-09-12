@@ -1,0 +1,41 @@
+{
+  "test": "test3",
+  "steps": [
+    {
+      "name": "test_hot_streak_and_triple_win_both_earned",
+      "points_possible": 6,
+      "points_earned": 6,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Fresh session (terminate-app + reopen dev-client URL), selected Geography. TOTAL_Q=10 (progress 'Question X of 10'). Pattern executed: Q1-5 correct, Q6 wrong (tapped 'Sydney' for capital-of-Australia), Q7-10 correct. Every submission produced explicit feedback ('Correct!' or 'Incorrect') and an explanation in the accessibility tree; correct-answer highlighting was verified visually in test1 (same feedback UI). Results: '9/10 Correct (90%)' (exactly 1 incorrect), percentage consistent with 9/10, achievements shown: Hot Streak and Triple Win, Perfect Round absent. 'Time: 42 seconds' displayed (non-fatal elapsed time passed)."
+    },
+    {
+      "name": "test_triple_win_boundary",
+      "points_possible": 4,
+      "points_earned": 4,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Used 'Play Again' for a new Geography round; TOTAL_Q=10. Pattern: Q1-3 correct, Q4-10 all wrong. Feedback and explanation appeared after each submission. Results: '3/10 Correct (30%)' (exactly 3 correct), achievements shown: Triple Win only; Hot Streak and Perfect Round absent. 'Time: 20 seconds' displayed (non-fatal passed)."
+    },
+    {
+      "name": "test_no_achievements_below_threshold",
+      "points_possible": 5,
+      "points_earned": 5,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Used 'Play Again'; TOTAL_Q=10. Pattern: Q1-2 correct, then Wrong/Correct alternating from Q3 (W C W C W C W C). EXPECTED_CORRECT = 2 + floor(8/2) = 6. Results: '6/10 Correct (60%)' matching expectation, no achievement names listed, and the message 'No achievements this round' displayed (non-fatal passed). 'Time: 21 seconds' displayed (non-fatal passed). Max consecutive was 2, correctly below Triple Win threshold."
+    },
+    {
+      "name": "test_perfect_round_awarded_only_when_10_of_10",
+      "points_possible": 5,
+      "points_earned": 5,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Used 'Play Again'; TOTAL_Q=10. Answered all 10 correctly (each matched via questions.json correct_option text). Feedback 'Correct!' plus explanation after every submission. Results: '10/10 Correct (100%)' with all three achievements: Perfect Round, Hot Streak, Triple Win (TOTAL_Q==10 branch). 'Time: 62 seconds' displayed (non-fatal passed)."
+    }
+  ],
+  "points_earned": 20,
+  "full_points": 20,
+  "pass": true,
+  "notes": "Streak tracking, max-streak reset on wrong answers, and all three achievement thresholds behaved exactly per the PRD at the boundaries tested. No retries were needed; TOTAL_Q was 10 in every Geography round."
+}

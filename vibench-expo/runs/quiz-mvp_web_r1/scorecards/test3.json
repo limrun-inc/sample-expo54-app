@@ -1,0 +1,41 @@
+{
+  "test": "test3",
+  "steps": [
+    {
+      "name": "test_hot_streak_and_triple_win_both_earned",
+      "points_possible": 6,
+      "points_earned": 6,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Fresh session, Geography, TOTAL_Q=10 from 'Question 1 of 10'. Pattern: Q1-5 correct, Q6 wrong, Q7-10 correct. Explicit feedback shown after every submission ('Correct!' x9, 'Incorrect' x1). Screenshot on the incorrect Q6 confirmed visual indication: chosen wrong answer outlined red, correct answer highlighted green, explanation displayed (non-fatal checks pass). Results: '9/10 Correct (90%)' (exactly 1 incorrect; percentage consistent), Hot Streak earned, Triple Win earned, Perfect Round NOT listed, 'Time: 58 seconds' (non-fatal pass)."
+    },
+    {
+      "name": "test_triple_win_boundary",
+      "points_possible": 4,
+      "points_earned": 4,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "'Play Again' started a new Geography round, TOTAL_Q=10. Pattern: Q1-3 correct, Q4-10 wrong. Feedback shown after every submission; explanations displayed. Results: '3/10 Correct (30%)', Triple Win earned, Hot Streak NOT listed, Perfect Round NOT listed, 'Time: 29 seconds' (non-fatal pass)."
+    },
+    {
+      "name": "test_no_achievements_below_threshold",
+      "points_possible": 5,
+      "points_earned": 5,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "'Play Again', TOTAL_Q=10. Pattern: Q1-2 correct, then alternating Wrong/Correct from Q3 (W,C,W,C,W,C,W,C). EXPECTED_CORRECT = 2 + floor(8/2) = 6. Results: '6/10 Correct (60%)', no achievements listed, message 'No achievements this round' displayed (non-fatal pass), 'Time: 29 seconds' (non-fatal pass). Max consecutive correct was 2, correctly below the Triple Win threshold."
+    },
+    {
+      "name": "test_perfect_round_awarded_only_when_10_of_10",
+      "points_possible": 5,
+      "points_earned": 5,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "'Play Again', TOTAL_Q=10. Answered all 10 correctly; 'Correct!' feedback and explanation shown after each submission. Results: '10/10 Correct (100%)'; since TOTAL_Q == 10, Perfect Round, Hot Streak, and Triple Win were all earned as required. 'Time: 20 seconds' (non-fatal pass)."
+    }
+  ],
+  "points_earned": 20,
+  "full_points": 20,
+  "pass": true,
+  "notes": "All fatal and non-fatal verifications passed. Streak tracking, streak reset on incorrect answers, achievement thresholds (>=3, >=5), and Perfect Round gating all behave per the PRD."
+}

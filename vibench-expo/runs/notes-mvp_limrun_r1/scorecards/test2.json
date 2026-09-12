@@ -1,0 +1,49 @@
+{
+  "test": "test2",
+  "steps": [
+    {
+      "name": "test_empty_state_and_new_note_creation",
+      "points_possible": 10,
+      "points_earned": 10,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Fresh state via uninstall (simctl uninstall booted) + reinstall of the shared dev-client asset on the same instance. Gate shown (SecureTextField trait, masked), no note data before unlock. Unlock -> notes list with empty state 'No notes yet. Tap \"New Note\" to create one.' and New Note button. New Note -> editor with empty TextArea (placeholder 'Start typing…'). Back without typing -> empty note listed with placeholder title 'New Note' and timestamp '2026-07-10 22:26' (matched current UTC, format YYYY-MM-DD hh:mm)."
+    },
+    {
+      "name": "test_title_derived_from_first_nonempty_line",
+      "points_possible": 12,
+      "points_earned": 12,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Opened the empty note, typed '\\nMeeting Notes\\nAction items from today's call.' (leading blank line). After returning to list: title 'Meeting Notes' (first non-empty line), preview 'Action items from today's call.', timestamp updated 22:26 -> 22:27 (matched current UTC)."
+    },
+    {
+      "name": "test_sorting_by_last_edited",
+      "points_possible": 12,
+      "points_earned": 12,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Created 'Shopping List'; both notes present. TS_SHOPPING=2026-07-10 22:27, TS_MEETING=2026-07-10 22:27 (equal; Shopping List above — acceptable tie order). Edited Meeting Notes appending 'Follow up tomorrow', waited for the minute to roll (saved at 22:28:20). Title still 'Meeting Notes'. TS_MEETING_2=22:28 > TS_SHOPPING_2=22:27 and Meeting Notes moved above Shopping List — sort by last-edited desc confirmed."
+    },
+    {
+      "name": "test_autosave_persists_on_navigation",
+      "points_possible": 14,
+      "points_earned": 14,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Replaced Shopping List content with 'Daily Tasks\\nBuy groceries and call dentist.' and immediately navigated back: title changed to 'Daily Tasks', preview 'Buy groceries and call dentist.'. Cold relaunch: password gate shown first, no note data while locked (the Expo dev-menu overlay appeared on relaunch — dev-client artifact, dismissed; underneath was the gate). After unlock, 'Daily Tasks' present; editor value exactly 'Daily Tasks\\nBuy groceries and call dentist.' (line structure preserved)."
+    },
+    {
+      "name": "test_empty_note_remains_valid",
+      "points_possible": 8,
+      "points_earned": 8,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "New note, typed 'Temporary text', deleted all 14 chars via delete key presses (body placeholder returned), navigated back. A 'New Note' placeholder row exists (only one) with timestamp '2026-07-10 22:29' in correct format/UTC. "
+    }
+  ],
+  "points_earned": 56,
+  "full_points": 56,
+  "pass": true,
+  "notes": "Fresh state mechanism: app uninstalled via `lim ios simctl -- uninstall booted com.vibench.expobench` and reinstalled from the shared asset (`lim ios install-app` with the pulled main-debug.zip) on instance ios_useb_01kx71jwe3ftq9cn3dewhx7rd7. All timestamps matched current UTC time in YYYY-MM-DD hh:mm. All non-fatal verifications also passed."
+}

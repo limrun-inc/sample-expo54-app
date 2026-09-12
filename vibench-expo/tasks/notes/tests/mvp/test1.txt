@@ -1,0 +1,149 @@
+<test_plan>
+
+<purpose>
+Verify the password gate protects all note data, validates input correctly, and maintains per-app-session scope including re-lock on relaunch.
+</purpose>
+
+<seeding_and_precondition>
+Start from a fresh install state (no notes saved). If the app has been used before, clear its data (reinstall the app or use an in-app reset if provided).
+
+Mobile evaluation notes: drive the app through the iOS accessibility tree (`lim ios element-tree`, `lim ios tap-element`, `lim ios type`, etc.). "Relaunch" means terminating the app process and launching it again on the simulator.
+</seeding_and_precondition>
+
+<steps>
+<step>
+
+<name>
+test_password_gate_blocks_access
+</name>
+
+Launch the app.
+
+Verify:
+- A password gate is displayed (as a full-screen view or an overlay/modal) and note content is not accessible
+- There is a masked (secure) password input field
+- There is an unlock action (button or keyboard submit)
+- (non-fatal) No note-related information is visible (no titles, previews, counts, or timestamps)
+
+<points>6</points>
+</step>
+
+<step>
+
+<name>
+test_empty_and_wrong_password_rejected
+</name>
+
+Submit the unlock form with an empty password field.
+
+Verify:
+- The app remains on the password gate
+- (non-fatal) A validation message indicates password is required
+
+Enter an incorrect password `wrong-password` and submit.
+
+Verify:
+- The app remains on the password gate
+- (non-fatal) An error message indicates incorrect password
+- (non-fatal) No note data becomes visible
+
+<points>8</points>
+</step>
+
+<step>
+
+<name>
+test_correct_password_unlocks
+</name>
+
+Enter the correct password `my-notes-are-mine` and submit.
+
+Verify:
+- The app transitions to the notes list view
+- (non-fatal) An empty state is shown (fresh install has no notes)
+- A create-note action is available (commonly labeled "New Note" and/or represented by a plus icon)
+
+<points>6</points>
+</step>
+
+<step>
+
+<name>
+test_session_persists_within_app
+</name>
+
+While unlocked, use the create-note action (commonly "New Note") to open the note editor, then return to the notes list (or otherwise switch away from the editor back to the list view, if the app uses a split-pane layout).
+
+Verify:
+- The app does not re-prompt for the password during in-app navigation
+
+<points>4</points>
+</step>
+
+<step>
+
+<name>
+test_relaunch_relocks_app
+</name>
+
+With the app unlocked and showing the notes list, terminate the app and launch it again (cold relaunch).
+
+Verify:
+- After relaunch, the password gate is shown again
+- (non-fatal) No note data is visible until the password is re-entered
+
+If the password gate is NOT shown after relaunch (which would violate the PRD's re-lock requirement):
+- Record this verification as failed
+- Continue the test from the current state (do not attempt to force a lock)
+
+If the password gate IS shown after relaunch, re-enter `my-notes-are-mine` and verify the notes list becomes accessible again.
+
+<points>8</points>
+</step>
+
+<step>
+
+<name>
+test_background_foreground_does_not_lose_state
+</name>
+
+While unlocked, create a note:
+- Use the create-note action
+- Type body: "Session test note"
+- Return to the notes list so the note is saved
+
+Send the app to the background (e.g., go to the home screen) and then bring it back to the foreground without terminating it.
+
+Verify:
+- The app is still unlocked (per the PRD, brief backgrounding without termination does not need to re-lock), OR if the app chose to re-lock, unlocking with the password restores the same state. Either behavior is acceptable; what must hold is:
+  - No crash or data loss
+  - "Session test note" still exists in the notes list (after unlocking if needed)
+
+<points>6</points>
+</step>
+
+<step>
+
+<name>
+test_note_data_persists_across_relaunch_behind_gate
+</name>
+
+Terminate the app and launch it again.
+
+Verify:
+- The password gate appears first (not the note content)
+- (non-fatal) No part of any note is visible before unlock
+
+Enter `my-notes-are-mine` and submit.
+
+Verify:
+- The notes list is displayed and includes the note whose body contains "Session test note" (persistence across relaunch)
+- Opening that note shows body content including "Session test note"
+
+<points>12</points>
+</step>
+</steps>
+
+<full_points>50</full_points>
+
+</test_plan>

@@ -1,0 +1,10 @@
+{
+  "condition": "limrun",
+  "iterations": 2,
+  "self_assessment": "All PRD requirements were implemented in App.js and verified end-to-end on the Limrun iOS simulator via the accessibility tree: password gate (empty-submission and wrong-password errors, unlock via button and keyboard submit, no note data exposed before unlock, re-lock on cold relaunch), notes list (title from first non-empty line, 'New Note' placeholder for empty bodies, single-line preview from the line after the title, UTC 'YYYY-MM-DD hh:mm' timestamps, last-edited-desc sorting that re-sorts after edits), editor (autofocused multiline body, line breaks preserved, autosave on navigate-away with timestamp bump only on change), live case-insensitive substring search over title/body with no-match state, and delete from both list and editor with a permanent-deletion confirmation dialog (cancel keeps the note, confirm removes it immediately and navigates back from the editor). Persistence through AsyncStorage was confirmed across two terminate/relaunch cycles, including a 4-line body surviving intact. One fix was needed during verification: the native RN Modal used for delete confirmation was intermittently missing from the iOS accessibility tree, so it was replaced with an in-tree absolute overlay that is always reachable.",
+  "known_gaps": [
+    "Backgrounding/foregrounding without termination was not explicitly exercised on the simulator; the implementation keeps unlock state in React memory so it should not re-lock, but it was not directly observed.",
+    "RN Text testIDs (e.g. note-title-*, password-error) do not surface as AXUniqueId in the Limrun element tree; those texts are reachable by accessibility label instead. Buttons and inputs do expose their testIDs.",
+    "Preview truncation uses a 60-character cutoff with an ellipsis character plus numberOfLines=1; extremely long single-word previews rely on the native ellipsizing."
+  ]
+}
