@@ -17,14 +17,9 @@ Limrun TypeScript SDK example such as `examples/detox-ios` or
 
 Tunnel support is included through the local `@expo/ngrok` dev dependency.
 
-## iOS deployment target
-
-Native builds target iOS 15.1, the minimum supported by Expo SDK 54.
-`expo-build-properties` sets the app target. The local
-`with-pod-deployment-target` plugin raises lower CocoaPods targets to the same
-minimum during `pod install`, including ReachabilitySwift's privacy manifest
-bundle. This prevents Xcode 27 from rejecting that bundle's iOS 12 target.
-Targets that already require a newer iOS version keep their minimum.
+The local `with-pod-deployment-target` plugin applies Expo SDK 54's iOS 15.1
+minimum to CocoaPods resource bundles for Xcode 27. It covers the
+[upstream fix](https://github.com/expo/expo/pull/47562) that ships in SDK 57.
 
 ## Test Contract
 

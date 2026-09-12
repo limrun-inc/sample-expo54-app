@@ -7,7 +7,7 @@ module.exports = function withPodDeploymentTarget(config) {
     config.modResults.contents = mergeContents({
       tag: 'pod-deployment-target',
       src: config.modResults.contents,
-      newSrc: `    minimum_target = Gem::Version.new(podfile_properties.fetch('ios.deploymentTarget'))
+      newSrc: `    minimum_target = Gem::Version.new(podfile_properties['ios.deploymentTarget'] || min_ios_version_supported)
     installer.pods_project.targets.each do |target|
       target.build_configurations.each do |configuration|
         current_target = configuration.build_settings['IPHONEOS_DEPLOYMENT_TARGET']

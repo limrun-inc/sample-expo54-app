@@ -10,17 +10,7 @@
       "policy": "fingerprint"
     },
     "newArchEnabled": true,
-    "plugins": [
-      [
-        "expo-build-properties",
-        {
-          "ios": {
-            "deploymentTarget": "15.1"
-          }
-        }
-      ],
-      "./plugins/with-pod-deployment-target"
-    ],
+    "plugins": ["./plugins/with-pod-deployment-target"],
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
