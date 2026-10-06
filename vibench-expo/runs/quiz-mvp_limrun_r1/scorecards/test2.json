@@ -1,0 +1,41 @@
+{
+  "test": "test2",
+  "steps": [
+    {
+      "name": "test_insufficient_questions_warning",
+      "points_possible": 2,
+      "points_earned": 2,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Fresh session (terminate-app + reopen dev-client URL). Selected 'Finance' (1 question in data). Warning screen appeared with exact text 'Not enough questions in this category for all accomplishments', plus 'Proceed Anyway' (proceed-button) and 'Back to Categories' controls. Non-fatal proceed control: present."
+    },
+    {
+      "name": "test_proceed_through_warning",
+      "points_possible": 4,
+      "points_earned": 4,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Fresh session. Selected 'Sports' -> same warning appeared. Tapped 'Proceed Anyway' -> gameplay UI with question text ('How many players are on a soccer team?'), four options A-D, and progress 'Question 1 of 1'. Non-fatal: total Y=1 < 10, passed. Answered with option A (intentionally arbitrary; feedback showed 'Incorrect' + explanation), tapped 'See Results'. Results showed score in X/Y form: '0/1 Correct (0%)'. Non-fatal: 'New Category' control present, passed. Used it to return to category selection successfully."
+    },
+    {
+      "name": "test_full_category_no_warning",
+      "points_possible": 2,
+      "points_earned": 2,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "From category selection (via New Category), selected 'Geography'. No warning shown; app went directly to the first question with progress 'Question 1 of 10'."
+    },
+    {
+      "name": "test_surprise_me_behavior",
+      "points_possible": 5,
+      "points_earned": 5,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Fresh session. Tapped 'Surprise Me!'. App revealed the selected category before question 1: 'Surprise! Your category is: Technology' (SELECTED_CATEGORY=Technology), shown together with the insufficient-question warning (correct: Technology has 3 < 10 questions). Proceeded past warning -> gameplay UI with category label 'Technology', question text, four options, 'Question 1 of 3'. Q1 'What does WWW stand for?' and, after answering and advancing, Q2 'What does CPU stand for?' both belong to Technology in questions.json and the on-screen category label stayed 'Technology' (one category for the whole round). Warning/length rules: non-Geography/Science category -> warning shown and total 3 < 10. All consistent."
+    }
+  ],
+  "points_earned": 13,
+  "full_points": 13,
+  "pass": true,
+  "notes": "Fresh-state mechanism used per step: lim ios terminate-app com.vibench.expobench then reopen the dev-client URL (session-only state per PRD). All fatal and non-fatal verifications passed."
+}

@@ -1,0 +1,14 @@
+{
+  "task": "quiz-mvp",
+  "run": "quiz-mvp_web_r1",
+  "graded_score": 1.0,
+  "pass_at_1": true,
+  "complete_failure": false,
+  "points_earned": 47,
+  "full_points": 47,
+  "tests": {
+    "test1": {"earned": 14, "full": 14, "pass": true},
+    "test2": {"earned": 13, "full": 13, "pass": true},
+    "test3": {"earned": 20, "full": 20, "pass": true}
+  }
+}

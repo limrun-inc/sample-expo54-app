@@ -1,0 +1,49 @@
+{
+  "test": "test1",
+  "steps": [
+    {
+      "name": "test_category_selection_screen",
+      "points_possible": 2,
+      "points_earned": 2,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Accessibility tree on launch showed all 14 expected categories (History, Geography, Art & Culture, Science, Nature, Literature, Music, Health, Finance, Technology, Sports, Nutrition, Daily Life, Film & Television) each as a Button with testID category-<name>, plus a 'Surprise Me!' button (testID surprise-me). The Surprise Me! button sits at the bottom of a scrollable list and requires scrolling to be visible on screen, which the plan explicitly allows."
+    },
+    {
+      "name": "test_geography_game_initialization",
+      "points_possible": 2,
+      "points_earned": 2,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Tapping Geography loaded the first question immediately: question text visible, four options labeled 'A. ...' through 'D. ...' (testIDs option-A..option-D), progress indicator 'Question 1 of 10', and a 'Category: Geography' label."
+    },
+    {
+      "name": "test_answer_feedback_and_navigation",
+      "points_possible": 5,
+      "points_earned": 5,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Answered all 10 Geography questions correctly by matching on-screen question text to assets/questions.json and selecting the option whose text matched the correct option text. After every submission the tree showed 'Correct!'. Screenshot on Q1 confirmed the correct answer is visually highlighted (green border/background) and the explanation text from the JSON is displayed (both non-fatal checks pass). 'Next Question' advanced between questions; on Question 10 the button changed to 'See Results'. Environment note (not an app fault): during the first attempt at this step the Expo exp.direct tunnel dropped and the dev-client showed 'Failed to load app'; per protocol I relaunched using the lim ios reverse fallback tunnel and re-ran the round from Question 1. No app crash or misbehavior was observed on the retry."
+    },
+    {
+      "name": "test_perfect_score_results",
+      "points_possible": 4,
+      "points_earned": 4,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Results screen showed '10/10 Correct (100%)', 'Time: 116 seconds' (seconds granularity, non-fatal pass), and all three achievements listed: Perfect Round, Hot Streak, Triple Win."
+    },
+    {
+      "name": "test_play_again_same_category",
+      "points_possible": 1,
+      "points_earned": 1,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "'Play Again' restarted at 'Question 1 of 10' with the 'Category: Geography' label still shown; first question ('What is the capital of Australia?') is a Geography question in questions.json."
+    }
+  ],
+  "points_earned": 14,
+  "full_points": 14,
+  "pass": true,
+  "notes": "All fatal and non-fatal verifications passed. App exposes clean testIDs (category-<name>, option-A..D, next-button, play-again, new-category). Fresh-state mechanism used: none needed for this plan (single continuous session after the tunnel-fallback relaunch)."
+}

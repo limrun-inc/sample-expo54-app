@@ -1,0 +1,65 @@
+{
+  "test": "test1",
+  "steps": [
+    {
+      "name": "test_password_gate_blocks_access",
+      "points_possible": 6,
+      "points_earned": 6,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Fresh install (brand-new simulator instance + fresh dev-client asset install). On launch the app shows a full-screen password gate: title 'Notes', 'Enter password to unlock', a TextField (testID password-input) with SecureTextField trait, and an 'Unlock' button (testID unlock-button). Screenshot confirmed typed text renders as masked dots. No note titles/previews/counts/timestamps anywhere in the element tree."
+    },
+    {
+      "name": "test_empty_and_wrong_password_rejected",
+      "points_possible": 8,
+      "points_earned": 8,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Empty submit: stayed on gate, StaticText 'Password is required' appeared. Wrong password 'wrong-password' submitted via Unlock button: stayed on gate, StaticText 'Incorrect password' appeared, no note data visible."
+    },
+    {
+      "name": "test_correct_password_unlocks",
+      "points_possible": 6,
+      "points_earned": 6,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Correct password unlocked to notes list. Empty state 'No notes yet. Tap \"New Note\" to create one.' shown. 'New Note' button (testID new-note-button) present, plus a search field."
+    },
+    {
+      "name": "test_session_persists_within_app",
+      "points_possible": 4,
+      "points_earned": 4,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "New Note opened the editor (keyboard visible, body TextArea focused); Back returned to the list with no password re-prompt. The empty note was listed with placeholder title 'New Note' and timestamp '2026-07-10 22:20' matching current UTC time."
+    },
+    {
+      "name": "test_relaunch_relocks_app",
+      "points_possible": 8,
+      "points_earned": 8,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Cold relaunch (lim ios terminate-app + reopen dev-client URL): password gate shown again, no note data visible while locked. Re-entering 'my-notes-are-mine' restored the notes list with the previously created note."
+    },
+    {
+      "name": "test_background_foreground_does_not_lose_state",
+      "points_possible": 6,
+      "points_earned": 6,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Created note with body 'Session test note', returned to list (saved, timestamp 2026-07-10 22:22 UTC, correct). Backgrounded by launching Settings, foregrounded via launch-app (no termination; 'Return to Settings' breadcrumb confirmed). App remained unlocked, no crash, 'Session test note' still listed."
+    },
+    {
+      "name": "test_note_data_persists_across_relaunch_behind_gate",
+      "points_possible": 12,
+      "points_earned": 12,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Cold relaunch: gate appeared first, no note content visible while locked. After unlock, list showed 'Session test note' (2026-07-10 22:22) and the empty 'New Note'. Opening the note showed editor TextArea value 'Session test note'."
+    }
+  ],
+  "points_earned": 50,
+  "full_points": 50,
+  "pass": true,
+  "notes": "Fresh state mechanism: brand-new Limrun simulator instance (ios_useb_01kx71jwe3ftq9cn3dewhx7rd7) with the shared dev-client asset installed; Metro for RUN_DIR/app on port 8093 via exp.direct tunnel (bundle request observed in this Metro's logs). All timestamps matched YYYY-MM-DD hh:mm in UTC (verified against date -u). All non-fatal verifications also passed."
+}
