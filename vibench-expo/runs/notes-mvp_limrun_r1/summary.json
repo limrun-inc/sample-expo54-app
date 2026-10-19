@@ -1,0 +1,14 @@
+{
+  "task": "notes-mvp",
+  "run": "notes-mvp_limrun_r1",
+  "graded_score": 1.0,
+  "pass_at_1": true,
+  "complete_failure": false,
+  "points_earned": 166,
+  "full_points": 166,
+  "tests": {
+    "test1": {"earned": 50, "full": 50, "pass": true},
+    "test2": {"earned": 56, "full": 56, "pass": true},
+    "test3": {"earned": 60, "full": 60, "pass": true}
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "test": "test3",
+  "steps": [
+    {
+      "name": "test_setup_notes_for_search",
+      "points_possible": 6,
+      "points_earned": 6,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Fresh state via uninstall + reinstall of the shared dev-client asset. Unlocked, created the three multi-line notes exactly as specified (each saved by navigating back to the list). All three titles present: 'Project Alpha', 'Shopping List', 'Weekend Ideas' with previews and timestamps (2026-07-10 22:31, matched current UTC). Search input (testID search-input) visible above the list."
+    },
+    {
+      "name": "test_case_insensitive_substring_search",
+      "points_possible": 12,
+      "points_earned": 12,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Query 'project' (lowercase): 'Project Alpha' visible (title match, case-insensitive), 'Weekend Ideas' visible (body 'projects' substring match), 'Shopping List' absent. All three timestamps tied at 2026-07-10 22:31, so any order among the two results is acceptable; ordering (Weekend Ideas, Project Alpha) is consistent with creation order under a tie."
+    },
+    {
+      "name": "test_clear_search_restores_all",
+      "points_possible": 4,
+      "points_earned": 4,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Cleared the query with delete key presses; all three notes reappeared."
+    },
+    {
+      "name": "test_search_no_results",
+      "points_possible": 6,
+      "points_earned": 6,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Query 'zzz-nomatch-123': no note rows; friendly empty state 'No notes match your search.' shown (not an error). Clearing the field restored all three notes."
+    },
+    {
+      "name": "test_delete_from_list_with_cancel",
+      "points_possible": 8,
+      "points_earned": 8,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Per-row delete button ('Delete Shopping List') opened a confirmation dialog: 'Delete Note?' / 'This note will be permanently deleted. This cannot be undone.' with Cancel and Delete buttons (custom modal with testIDs, fully accessible in the AX tree). Cancel closed the dialog; 'Shopping List' still listed."
+    },
+    {
+      "name": "test_delete_from_list_confirmed",
+      "points_possible": 12,
+      "points_earned": 12,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Confirmed deletion: 'Shopping List' immediately removed; 'Project Alpha' and 'Weekend Ideas' remained. Search 'shopping' returned no results. Cleared search, cold relaunch: password gate shown before any note data (only gate elements in the tree). After unlock, 'Shopping List' still gone; the other two notes present."
+    },
+    {
+      "name": "test_delete_from_editor",
+      "points_possible": 12,
+      "points_earned": 12,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Opened 'Project Alpha'; editor delete button (testID editor-delete-button) showed the same confirmation dialog. Confirming navigated back to the notes list; 'Project Alpha' gone, 'Weekend Ideas' still present."
+    }
+  ],
+  "points_earned": 60,
+  "full_points": 60,
+  "pass": true,
+  "notes": "Fresh state mechanism: uninstall via simctl + reinstall of shared dev-client asset on instance ios_useb_01kx71jwe3ftq9cn3dewhx7rd7. Delete confirmation is a custom accessible modal rather than a native Alert.alert; it behaved correctly on real iOS and all controls were reachable via the accessibility tree. All non-fatal verifications also passed."
+}

@@ -1,0 +1,41 @@
+{
+  "test": "test2",
+  "steps": [
+    {
+      "name": "test_insufficient_questions_warning",
+      "points_possible": 2,
+      "points_earned": 2,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Fresh session via terminate-app + reopen dev-client URL. Selecting Finance showed the exact warning text 'Not enough questions in this category for all accomplishments' with a 'Proceed Anyway' button (non-fatal control check passes) and a 'Back to Categories' button."
+    },
+    {
+      "name": "test_proceed_through_warning",
+      "points_possible": 4,
+      "points_earned": 4,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Fresh session; selecting Sports showed the same warning. 'Proceed Anyway' led to gameplay UI: question text, four options A-D, progress 'Question 1 of 1' (total 1 < 10, non-fatal pass). Answered the single question (incorrectly, any choice allowed); 'See Results' led to results showing '0/1 Correct (0%)' (X/Y form). 'New Category' control exists (non-fatal pass) and returned to the category selection screen."
+    },
+    {
+      "name": "test_full_category_no_warning",
+      "points_possible": 2,
+      "points_earned": 2,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "From category selection (via New Category), selecting Geography showed no warning and went directly to the first question with progress 'Question 1 of 10'."
+    },
+    {
+      "name": "test_surprise_me_behavior",
+      "points_possible": 5,
+      "points_earned": 5,
+      "fatal_failures": [],
+      "non_fatal_failures": [],
+      "notes": "Fresh session via terminate-app + reopen. 'Surprise Me!' is below the fold; scrolled down to bring it on-screen before tapping (an initial tap-element attempt on the off-screen element failed with a simulator hit-test error; recovered by scrolling — automation detail, not an app defect). Tapping it showed 'Surprise! Your category is: Music' (category revealed before question 1). SELECTED_CATEGORY=Music (3 questions in data, <10): the insufficient-question warning was correctly shown; 'Proceed Anyway' led to 'Question 1 of 3' with the 'Category: Music' label. Q1 (piano keys, q049) and, after answering and advancing, Q2 (guitar strings, q026) are both Music questions in questions.json, confirming one category for the whole round. Warning/length rules verified for the non-Geography/Science branch: warning shown and total 3 < 10."
+    }
+  ],
+  "points_earned": 13,
+  "full_points": 13,
+  "pass": true,
+  "notes": "All fatal and non-fatal verifications passed. Fresh-state mechanism: lim ios terminate-app com.vibench.expobench followed by reopening the dev-client URL (PRD requires session-only state, so relaunch suffices)."
+}
